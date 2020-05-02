@@ -9,38 +9,43 @@ import {
   DirectionalLight,
 } from 'three';
 
-window.addEventListener('DOMContentLoaded', init);
+let width: number;
+let height: number;
+let scene: Scene;
+let camera: PerspectiveCamera;
+let geometry: SphereGeometry;
+let loader: TextureLoader;
+let mesh: Mesh;
+let light: DirectionalLight;
+
+const renderer = new WebGLRenderer({
+  canvas: document.querySelector('#mycanvas') as HTMLCanvasElement,
+});
 
 function init() {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-
-  const renderer = new WebGLRenderer({
-    canvas: document.querySelector('#mycanvas') as HTMLCanvasElement,
-  });
-
+  width = window.innerWidth;
+  height = window.innerHeight;
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(width, height);
 
   // シーンの作成
-  const scene = new Scene();
+  scene = new Scene();
 
   // カメラの作成
-  const camera = new PerspectiveCamera(50, width / height, 10, 2000);
+  camera = new PerspectiveCamera(50, width / height, 0.1, 1000);
   camera.position.set(0, 0, 500);
 
   // オブジェクトの作成
-  const geometry = new SphereGeometry(100, 30, 30);
-  const loader = new TextureLoader();
-  const texture = loader.load('images/earthmap1k.jpg');
+  geometry = new SphereGeometry(100, 30, 30);
+  loader = new TextureLoader();
   const material = new MeshStandardMaterial({
-    map: texture,
+    map: loader.load('images/earthmap1k.jpg'),
   });
-  const mesh = new Mesh(geometry, material);
+  mesh = new Mesh(geometry, material);
   scene.add(mesh);
 
   // ライト
-  const light = new DirectionalLight(0xffffff, 1);
+  light = new DirectionalLight(0xffffff, 1);
   light.position.set(1, 1, 1);
   scene.add(light);
 
@@ -49,7 +54,17 @@ function init() {
   function animate() {
     mesh.rotation.y += 0.005;
     renderer.render(scene, camera);
-
     requestAnimationFrame(animate);
   }
 }
+
+window.addEventListener('DOMContentLoaded', init);
+
+window.addEventListener('resize', () => {
+  // リサイズで width と height を更新
+  width = window.innerWidth;
+  height = window.innerHeight;
+  camera = new PerspectiveCamera(50, width / height, 0.1, 1000);
+  camera.position.set(0, 0, 500);
+  renderer.setSize(width, height);
+});
