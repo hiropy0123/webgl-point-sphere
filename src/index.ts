@@ -8,7 +8,8 @@ import {
   MathUtils,
   Points,
   PointsMaterial,
-  Group
+  Group,
+  Sphere,
 } from 'three';
 import gsap from 'gsap';
 
@@ -41,9 +42,9 @@ camera.position.set(0, 0, 500);
 
 // オブジェクトの作成
 geometry = new Geometry();
-let distance = Math.min(200, width / 4);
+let distance = Math.min(100, width / 4);
 
-for (let i = 0; i < 1600; i++) {
+for (let i = 0; i < 1200; i++) {
   let vertex = new Vector3();
   let theta = MathUtils.randFloatSpread(360);
   let phi = MathUtils.randFloatSpread(360);
@@ -55,8 +56,7 @@ for (let i = 0; i < 1600; i++) {
   geometry.vertices.push(vertex);
 }
 
-let particles = new Points(geometry, new PointsMaterial({ color: 0xff44ff, size: 2 }))
-particles.boundingSphere = 50;
+let particles = new Points(geometry, new PointsMaterial({ color: 0xff44ff, size: 2 }));
 
 let renderingParent = new Group();
 renderingParent.add(particles);
