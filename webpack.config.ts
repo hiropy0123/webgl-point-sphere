@@ -1,11 +1,11 @@
-import * as webpack from 'webpack';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
+import { Configuration } from 'webpack';
+import CopyPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const MODE = 'development';
 const enabledSourceMap = MODE === 'development';
 
-const config: webpack.Configuration = {
+const config: Configuration = {
   mode: MODE,
   entry: './src/index.ts',
   output: {
@@ -59,13 +59,15 @@ const config: webpack.Configuration = {
     extensions: ['*', '.tsx', '.ts', '.js', '.json'],
   },
   plugins: [
-    new CopyWebpackPlugin([
-      {
-        from: `${__dirname}/static/images/**/*`,
-        to: `${__dirname}/dist/images`,
-        flatten: true,
-      },
-    ]),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: `${__dirname}/static/images/**/*`,
+          to: `${__dirname}/dist/images`,
+          flatten: true,
+        },
+      ]
+    }),
     new HtmlWebpackPlugin({
       template: `${__dirname}/src/index.html`,
     }),
