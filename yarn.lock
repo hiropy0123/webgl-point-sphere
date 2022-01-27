@@ -5891,10 +5891,10 @@ terser@^5.7.0:
     source-map "~0.7.2"
     source-map-support "~0.5.19"
 
-three@^0.131.2:
-  version "0.131.2"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.131.2.tgz#95c1c805594bf5bf4d5027b25b2bc07ae20baa81"
-  integrity sha512-1Wmd0xYihEVpU9HjQ3POqnTlx6VZHmmbmtNgAWY/EVwOvkdXpSE6yFVwIvTkEubCd5LzK14pCHwb36SXoAxi3A==
+three@^0.137.0:
+  version "0.137.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.137.0.tgz#0ebd6ba66637a332c31f234bcdd35aeec071a6e3"
+  integrity sha512-rzSDhia6cU35UCy6y+zEEws6vSgytfHqFMSaBvUcySgzwvDO6vETyswtSNi/+aVqJw8WLMwyT1mlQQ1T/dxxOA==
 
 thunky@^1.0.2:
   version "1.1.0"
